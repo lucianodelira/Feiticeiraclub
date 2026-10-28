@@ -2,7 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.feiticeiraclub.net/posts/Politicas.html</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-28</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.feiticeiraclub.net/posts/feiticeiraclub-estratgias-para-o-bicho--2026-10-28.html</loc>
+    <lastmod>2026-10-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
@@ -5841,12 +5847,6 @@
   <url>
     <loc>https://www.feiticeiraclub.net/posts/estatsticas-avanadas-de-loterias--2025-05-19.html</loc>
     <lastmod>2025-05-19</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://www.feiticeiraclub.net/posts/sorteios-da-semana-lotofcil--2025-05-18.html</loc>
-    <lastmod>2025-05-18</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.8</priority>
   </url>
