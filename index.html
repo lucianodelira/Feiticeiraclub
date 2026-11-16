@@ -910,6 +910,209 @@ function fecharWhatsBanner() {
 </script>
 
 
+<!-- RODAPÉ FINO COM SUPORTE E BANCAS -->
+<style>
+  .container {
+    height: 100vh !important;
+    height: 100dvh !important;
+  }
+
+  .iframe-container {
+    flex: 1 1 auto !important;
+    min-height: 0 !important;
+  }
+
+  .buttons {
+    position: relative !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    flex: 0 0 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    padding: 0 8px !important;
+    gap: 5px !important;
+    background: #080808 !important;
+    border-top: 1px solid #292929;
+    box-sizing: border-box !important;
+  }
+
+  #menu-hamburguer {
+    background: transparent !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    padding: 0 5px !important;
+    height: 30px !important;
+    margin: 0 !important;
+    font-size: 10px !important;
+    white-space: nowrap;
+  }
+
+  #menu-hamburguer svg {
+    width: 15px !important;
+    height: 15px !important;
+    margin-right: 5px !important;
+  }
+
+  #menu-hamburguer span {
+    font-size: 10px !important;
+  }
+
+  .buttons .botoes-container {
+    position: absolute !important;
+    bottom: 35px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: max-content !important;
+    max-width: 95vw !important;
+    z-index: 10000 !important;
+  }
+
+  #suporte-arrastar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    height: 30px;
+    padding: 0 5px;
+    border: none;
+    background: transparent;
+    color: white;
+    font: bold 11px Arial, sans-serif;
+    cursor: pointer;
+    touch-action: pan-y;
+    white-space: nowrap;
+  }
+
+  #suporte-arrastar .seta {
+    font-size: 17px;
+  }
+
+  #suporte-painel {
+    display: none;
+    position: absolute;
+    right: 6px;
+    bottom: 34px;
+    width: min(290px, calc(100vw - 12px));
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 12px 12px 0 0;
+    padding: 16px;
+    box-sizing: border-box;
+    z-index: 10001;
+    box-shadow: 0 -5px 20px #0008;
+    text-align: center;
+    color: #fff;
+  }
+
+  #suporte-painel.aberto {
+    display: block;
+  }
+
+  #suporte-painel p {
+    font-size: 13px;
+    margin: 0 0 12px;
+  }
+
+  #suporte-painel a {
+    display: block;
+    padding: 12px;
+    background: #166534;
+    color: white;
+    text-align: center;
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  @media(max-width: 370px) {
+    #menu-hamburguer span {
+      font-size: 9px !important;
+    }
+
+    #suporte-arrastar {
+      font-size: 10px;
+      padding: 0 3px;
+    }
+  }
+</style>
+
+<script>
+(function () {
+  const rodape = document.querySelector(".buttons");
+  if (!rodape || document.getElementById("suporte-arrastar")) return;
+
+  const suporte = document.createElement("button");
+  suporte.id = "suporte-arrastar";
+  suporte.type = "button";
+  suporte.setAttribute("aria-expanded", "false");
+  suporte.setAttribute("aria-controls", "suporte-painel");
+  suporte.innerHTML =
+    '<span class="seta">⌃</span> Arraste para cima · Suporte';
+
+  const painel = document.createElement("div");
+  painel.id = "suporte-painel";
+  painel.innerHTML = `
+    <p>Precisa de ajuda? Acesse nosso suporte.</p>
+    <a href="https://app.jadeucerto.net"
+       target="_blank"
+       rel="noopener noreferrer">
+       ABRIR SUPORTE
+    </a>
+  `;
+
+  rodape.appendChild(suporte);
+  rodape.appendChild(painel);
+
+  function abrirSuporte(aberto) {
+    painel.classList.toggle("aberto", aberto);
+    suporte.setAttribute("aria-expanded", String(aberto));
+    suporte.querySelector(".seta").textContent =
+      aberto ? "⌄" : "⌃";
+  }
+
+  suporte.addEventListener("click", function () {
+    abrirSuporte(!painel.classList.contains("aberto"));
+  });
+
+  let inicioY = null;
+
+  suporte.addEventListener("touchstart", function (e) {
+    inicioY = e.touches[0].clientY;
+  }, { passive: true });
+
+  suporte.addEventListener("touchend", function (e) {
+    if (inicioY === null) return;
+
+    const distancia = e.changedTouches[0].clientY - inicioY;
+
+    if (distancia < -15) abrirSuporte(true);
+    if (distancia > 15) abrirSuporte(false);
+
+    inicioY = null;
+  }, { passive: true });
+
+  painel.addEventListener("touchstart", function (e) {
+    inicioY = e.touches[0].clientY;
+  }, { passive: true });
+
+  painel.addEventListener("touchend", function (e) {
+    if (inicioY !== null &&
+        e.changedTouches[0].clientY - inicioY > 20) {
+      abrirSuporte(false);
+    }
+    inicioY = null;
+  }, { passive: true });
+
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") abrirSuporte(false);
+  });
+})();
+</script>
+<!-- FIM DO RODAPÉ -->
+  
   
 </body>
 </html>
